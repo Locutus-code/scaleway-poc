@@ -13,11 +13,11 @@ pub struct HelloResponse<'a> {
 }
 
 impl HelloResponse<'_> {
-    pub fn new(message: &str) -> HelloResponse {
+    pub fn new(message: &str, service_id: Uuid) -> HelloResponse {
 	HelloResponse{
 	    msg: message,
 	    request_id: Uuid::new_v4(),
-	    service_id: Uuid::new_v4()
+	    service_id: service_id
 	}
     }
 }
