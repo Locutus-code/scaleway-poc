@@ -1,7 +1,6 @@
-use std::sync::atomic::AtomicU64;
-
-// use rocket::State;
 use serde::Serialize;
+use std::env;
+use std::sync::atomic::AtomicU64;
 use uuid::Uuid;
 
 #[derive(Serialize)]
@@ -35,13 +34,16 @@ pub struct HealthResponse {
 pub struct ApplicationState {
     pub requests_served: AtomicU64,
     pub service_id: Uuid,
+    pub queue_url: String,
 }
 
 impl ApplicationState {
     pub fn new() -> ApplicationState {
+        let queue_url = env::var("PRODUCER_QUEUE_URL").expect("queue url must be set");
         ApplicationState {
             requests_served: 0.into(),
             service_id: Uuid::new_v4(),
+            queue_url,
         }
     }
 }
