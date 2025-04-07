@@ -5,6 +5,10 @@ This repo contains a super basic example setup of a typical cloud architecture b
 ## Architecture overview
 
 ```mermaid
+---
+config:
+    layout: elk
+---
 flowchart
 
     Browser --> WebDistribution
