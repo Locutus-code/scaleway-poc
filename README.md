@@ -4,7 +4,7 @@ This repo contains a super basic example setup of a typical cloud architecture b
 
 ## Architecture overview
 
-```mmd
+```mermaid
 flowchart
 
     Browser --> WebDistribution
