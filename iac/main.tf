@@ -14,8 +14,6 @@ variable "project_id" {
 
 // TODO:
 
-// Queue
-
 // Async function
 
 // Serverless SQL
@@ -27,4 +25,3 @@ variable "project_id" {
 // S3 Assets
 
 // REDIS
-
