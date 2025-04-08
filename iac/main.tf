@@ -14,19 +14,17 @@ variable "project_id" {
 
 // TODO:
 
-// CDN
-
-// S3 Assets
-
-// Application GW
-
-// BE API Container
-
 // Queue
 
 // Async function
 
 // Serverless SQL
+
+// Application GW
+
+// CDN
+
+// S3 Assets
 
 // REDIS
 
