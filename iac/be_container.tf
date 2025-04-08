@@ -19,10 +19,12 @@ resource "scaleway_container" "main" {
   deploy         = true
 
   environment_variables = {
-    "SQS_ENDPOINT_URL" : "${scaleway_mnq_sqs_queue.main.sqs_endpoint}",
+    "ENDPOINT_URL" : "${scaleway_mnq_sqs_queue.main.sqs_endpoint}",
     "PRODUCER_QUEUE_URL" : "${scaleway_mnq_sqs_queue.main.url}"
   }
   secret_environment_variables = {
+    "AWS_SECRET_ACCESS_KEY" : "${scaleway_mnq_sqs_credentials.main.access_key}"
+    "AWS_ACCESS_KEY_ID" : "${scaleway_mnq_sqs_credentials.main.secret_key}"
   }
 
   health_check {

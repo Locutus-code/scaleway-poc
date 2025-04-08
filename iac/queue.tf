@@ -6,8 +6,8 @@ resource "scaleway_mnq_sqs_credentials" "main" {
 
   permissions {
     can_manage  = true
-    can_receive = false
-    can_publish = false
+    can_receive = true
+    can_publish = true
   }
 }
 
