@@ -60,3 +60,15 @@ flowchart
 ### Backend
 
 Simple Rocket API.
+
+### Infrastructure
+
+IaC is managed through OpenTofu in the `iac/` subfolder.
+
+Install OpenTofu and export the env variable `TF_VARS_project_id` to point it at the deployment target.
+
+For example, to deploy to the default project:
+
+```fish
+set -gx TF_TF_VAR_project_id (scw account project list --output json |jq .[0].id)
+```
