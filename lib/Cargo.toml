@@ -1,0 +1,10 @@
+[package]
+name = "lib"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+serde = { version = "1.0.219", features = ["derive"] }
+uuid = { version = "1.16.0", features = ["v4", "serde"] }
+aws-config = { version = "1.6.1", features = ["behavior-version-latest"] }
+aws-sdk-sqs = { version = "1.64.0", features = ["behavior-version-latest"] }

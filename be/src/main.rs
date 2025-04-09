@@ -5,9 +5,9 @@ mod models;
 mod routers;
 mod workers;
 
-use models::ApplicationState;
-
-use crate::routers::{get_health, get_hello};
+use crate::models::state::ApplicationState;
+use crate::routers::health::get_health;
+use crate::routers::hello::get_hello;
 
 #[rocket::main]
 async fn main() -> Result<(), rocket::Error> {
