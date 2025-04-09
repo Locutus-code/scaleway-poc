@@ -1,12 +1,12 @@
 use std::fmt::Display;
 
 use axum::{
-    body::{to_bytes, Body}, extract::{Request}, response::Response
+    body::{to_bytes, Body}, extract::Request, response::Response
 };
 use http::StatusCode;
+use argon2::Argon2;
+
 use lib::SqsPayload;
-
-
 fn handle_error<Err: Display>(err: Err, status: Option<StatusCode>) -> Response<Body> {
 
     let status = status.unwrap_or(StatusCode::INTERNAL_SERVER_ERROR);
@@ -15,8 +15,6 @@ fn handle_error<Err: Display>(err: Err, status: Option<StatusCode>) -> Response<
         .body(Body::from(format!("{}", err)))
         .unwrap()	
 }
-
-// async fn get_payload(extract::Json(payload): extract::Json<SqsPayload<'_>>) {}
 
 pub async fn handle(req: Request<Body>) -> Response<Body> {
 
@@ -27,6 +25,11 @@ pub async fn handle(req: Request<Body>) -> Response<Body> {
 	Ok(data) => data,
 	Err(error) => return handle_error(error, None)
     };
+    
+    let salt = "urmomaksjdklajsdlkajsdkljasldja".as_bytes();
+    let mut output_key_material = [0u8; 32];
+    let _ = Argon2::default().hash_password_into(result_data.msg.as_bytes(), salt, &mut output_key_material);
+    println!("{:?}", output_key_material);
     
     Response::builder()
         .status(StatusCode::OK)
