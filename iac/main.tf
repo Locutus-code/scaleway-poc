@@ -12,12 +12,24 @@ variable "project_id" {
   description = ""
 }
 
+variable "redis_username" {
+  type = string
+}
+
+variable "redis_password" {
+  type = string
+}
+
 output "producer_queue_url" {
   value = scaleway_mnq_sqs_queue.main.url
 }
 
 output "sqs_endpoint_url" {
   value = scaleway_mnq_sqs_queue.main.sqs_endpoint
+}
+
+output "redis_url" {
+  value = "${scaleway_redis_cluster.main.public_network[0].ips[0]}:${scaleway_redis_cluster.main.public_network[0].port}"
 }
 
 // TODO:
