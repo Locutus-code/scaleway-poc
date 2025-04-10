@@ -710,6 +710,16 @@ dependencies = [
 ]
 
 [[package]]
+name = "common"
+version = "0.1.0"
+dependencies = [
+ "aws-config",
+ "aws-sdk-sqs",
+ "serde",
+ "uuid",
+]
+
+[[package]]
 name = "cookie"
 version = "0.18.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -2835,13 +2845,16 @@ name = "triggered-function"
 version = "0.1.0"
 dependencies = [
  "argon2",
+ "aws-config",
+ "aws-sdk-sqs",
  "axum",
+ "common",
  "http 1.3.1",
- "lib",
  "rand_core 0.9.3",
  "serde",
  "serde_json",
  "tokio",
+ "uuid",
 ]
 
 [[package]]

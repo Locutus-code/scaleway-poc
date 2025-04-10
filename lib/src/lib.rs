@@ -16,12 +16,12 @@ pub struct SqsPayload<'a> {
 
 impl SqsPayload<'_> {
     pub fn mock() -> SqsPayload<'static> {
-	let msg = "Foobar";
-	SqsPayload {
-	    msg_type: MessageType::Hello,
-	    msg: &msg,
-	    request_id: Uuid::new_v4(),
-	    service_id: Uuid::new_v4()
-	}
+        let msg = "Foobar";
+        SqsPayload {
+            msg_type: MessageType::Hello,
+            msg: &msg,
+            request_id: Uuid::new_v4(),
+            service_id: Uuid::new_v4(),
+        }
     }
 }
