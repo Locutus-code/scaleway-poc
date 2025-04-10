@@ -11,4 +11,6 @@ rocket = { version = "0.5.1", features = ["json"] }
 serde = { version = "1.0.219", features = ["derive"] }
 uuid = { version = "1.16.0", features = ["v4", "serde"] }
 lib = { path = "../lib" }
+redis = { version = "0.29.5", features = ["tokio-native-tls-comp"] }
+random-string = "1.1.0"
 
