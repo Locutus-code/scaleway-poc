@@ -12,6 +12,14 @@ variable "project_id" {
   description = ""
 }
 
+output "producer_queue_url" {
+  value = scaleway_mnq_sqs_queue.main.url
+}
+
+output "sqs_endpoint_url" {
+  value = scaleway_mnq_sqs_queue.main.sqs_endpoint
+}
+
 // TODO:
 
 // Async function

@@ -5,6 +5,7 @@ resource "scaleway_function_namespace" "main" {
 
 resource "scaleway_function" "main" {
   namespace_id = scaleway_function_namespace.main.id
+  name         = "queue-consumer"
   runtime      = "rust185"
   handler      = "Handle"
   privacy      = "private"
@@ -21,7 +22,7 @@ resource "scaleway_function" "main" {
 
 resource "scaleway_function_trigger" "main" {
   function_id = scaleway_function.main.id
-  name        = "SQS Queue trigger"
+  name        = "sqs-queue-trigger"
   sqs {
     project_id = scaleway_mnq_sqs.main.project_id
     queue      = scaleway_mnq_sqs_queue.main.name
