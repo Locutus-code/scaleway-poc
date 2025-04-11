@@ -4,6 +4,7 @@ use uuid::Uuid;
 #[derive(Serialize, Deserialize)]
 pub enum MessageType {
     Hello,
+    Url,
 }
 
 #[derive(Serialize, Deserialize)]
