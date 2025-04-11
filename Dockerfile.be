@@ -1,7 +1,7 @@
 FROM rust:1.86.0-slim-bookworm as builder
 WORKDIR /app
 COPY . .
-RUN apt-get update && apt-get install -y ca-certificates && update-ca-certificates
+RUN apt-get update && apt-get install -y pkg-config build-essential openssl libssl-dev ca-certificates && update-ca-certificates
 RUN cargo build
 
 
