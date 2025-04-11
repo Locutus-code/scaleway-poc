@@ -4,7 +4,7 @@ use rocket::{State, get, post};
 use random_string;
 
 use crate::models::state::ApplicationState;
-use crate::models::url::{ResponseStatus, UrlGetResponse, UrlPostResponse};
+use crate::models::url::{ResponseStatus, UrlGetResponse, UrlPostRequest, UrlPostResponse};
 use crate::workers::redis::get_conn;
 use redis::AsyncCommands;
 
@@ -12,15 +12,28 @@ fn random_key() -> String {
     random_string::generate(8, random_string::charsets::ALPHA)
 }
 
-#[post("/url/<url>")]
-pub async fn post_url<'a>(url: &'a str, state: &State<ApplicationState>) -> Json<UrlPostResponse> {
+#[post("/url", format = "json", data = "<payload>")]
+pub async fn post_url<'a>(
+    payload: Json<UrlPostRequest>,
+    state: &State<ApplicationState>,
+) -> Json<UrlPostResponse> {
     let mut conn = get_conn(state).await;
     let key = random_key();
-    let _: () = conn.set(key.as_str(), url).await.unwrap();
+    // let db_result = conn.set(key.as_str(), &payload.url).await.unwrap();
+    let db_result = redis::cmd("SET")
+        .arg(&[key.as_str(), &payload.url])
+        .exec_async(&mut conn)
+        .await;
+
+    match db_result {
+        Ok(db_result) => rocket::info!("DB Save succeeded: {}", key),
+        Err(e) => rocket::error!("Db Save failed: {}", e),
+    }
 
     Json(UrlPostResponse {
         status: ResponseStatus::Accepted,
-        short_url: key,
+        short_url: key.clone(),
+        long_url: payload.url.clone(),
     })
 }
 

@@ -1,4 +1,4 @@
-use serde::Serialize;
+use serde::{Deserialize, Serialize};
 // use uuid::Uuid;
 
 #[derive(Serialize)]
@@ -9,10 +9,16 @@ pub enum ResponseStatus {
     Done,
 }
 
+#[derive(Deserialize, Serialize)]
+pub struct UrlPostRequest {
+    pub url: String,
+}
+
 #[derive(Serialize)]
 pub struct UrlPostResponse {
     pub status: ResponseStatus,
     pub short_url: String,
+    pub long_url: String,
 }
 
 #[derive(Serialize)]
