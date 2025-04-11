@@ -19,6 +19,7 @@ fn get_conninfo(state: &ApplicationState) -> ConnectionInfo {
     }
 }
 
+#[allow(unused_mut)]
 pub async fn get_conn(state: &ApplicationState) -> redis::aio::MultiplexedConnection {
     let conninfo = get_conninfo(state);
     let client = redis::Client::open(conninfo).expect("Error starting REDIS client");

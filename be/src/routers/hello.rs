@@ -2,6 +2,7 @@ use rocket::serde::json::Json;
 use rocket::serde::json::serde_json;
 use rocket::{State, get};
 
+use crate::helpers::log_message::request_counter;
 use crate::models::hello::HelloResponse;
 use crate::models::state::ApplicationState;
 use crate::workers::sqs::enqueue_msg;
@@ -13,13 +14,7 @@ pub async fn get_hello<'a>(
     msg: &'a str,
     state: &State<ApplicationState>,
 ) -> Json<HelloResponse<'a>> {
-    rocket::info!(
-        "requests served: {} by {}",
-        state
-            .requests_served
-            .fetch_add(1, std::sync::atomic::Ordering::Relaxed),
-        state.service_id
-    );
+    request_counter(state);
     let response = HelloResponse::new(msg, state.service_id);
     enqueue_msg(
         state,

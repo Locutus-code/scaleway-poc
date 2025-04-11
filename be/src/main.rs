@@ -1,6 +1,7 @@
 #[macro_use]
 extern crate rocket;
 
+mod helpers;
 mod models;
 mod routers;
 mod workers;
